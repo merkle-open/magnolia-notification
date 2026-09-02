@@ -1,0 +1,7 @@
+emails: [ ]
+sender:
+licenseConfig:
+  enabled: false
+  subjectTemplate: "${instance} magnolia license expiration in ${expiration}"
+  bodyTemplate: "The license for ${instance} is expiring in ${expiration} \n ${license}"
+  reminder: [ 30 ]

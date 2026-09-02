@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM "module.dtd" >
+<module>
+    <name>magnolia-notification-trigger</name>
+    <displayName>Magnolia notification</displayName>
+    <description>The notification module triggers notifications via cron jobs</description>
+    <class>com.merkle.oss.magnolia.notification.NotificationTriggerModule</class>
+    <versionHandler>com.merkle.oss.magnolia.notification.configuration.NotificationModuleVersionHandler</versionHandler>
+    <version>${project.version}</version>
+
+    <components>
+        <id>main</id>
+        <configurer>
+            <class>com.merkle.oss.magnolia.notification.configuration.NotificationGuiceComponentConfigurer</class>
+        </configurer>
+        <component>
+            <type>com.merkle.oss.magnolia.notification.service.EmailService</type>
+            <implementation>com.merkle.oss.magnolia.notification.service.EmailService</implementation>
+            <scope>singleton</scope>
+        </component>
+    </components>
+
+    <dependencies>
+        <dependency>
+            <name>scheduler</name>
+            <version>*</version>
+        </dependency>
+    </dependencies>
+</module>
