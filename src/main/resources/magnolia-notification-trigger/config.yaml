@@ -2,6 +2,6 @@ emails: [ ]
 sender:
 licenseConfig:
   enabled: false
-  subjectTemplate: "${instance} magnolia license expiration in ${expiration}"
-  bodyTemplate: "The license for ${instance} is expiring in ${expiration} \n ${license}"
+  subjectTemplate: "${instance} magnolia license expiration in ${expiration} days"
+  bodyTemplate: "The license for ${instance} is expiring in ${expiration} days \n ${license}"
   reminder: [ 30 ]

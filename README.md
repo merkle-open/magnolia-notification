@@ -24,7 +24,7 @@ The notification module triggers notifications via cron jobs.
 emails: ["bjoern.eschle@merkle.com"]
 licenseConfig:
   enabled: true
-  subjectTemplate: "ProjectXY ${instance} magnolia license expiration in ${expiration}"
-  bodyTemplate: "The license for ${instance} is expiring in ${expiration} \n ${license}"
+  subjectTemplate: "ProjectXY ${instance} magnolia license expiration in ${expiration} days"
+  bodyTemplate: "The license for ${instance} is expiring in ${expiration} days \n ${license}"
   reminderInDays: [30, 10, 1]
 ```
