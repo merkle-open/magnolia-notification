@@ -55,7 +55,10 @@ public class LicenseExpirationNotifier implements Notifier {
             emailService.send(
                     config.getSubjectTemplate(),
                     config.getBodyTemplate(),
-                    notificationTriggerModule.getEmails(),
+                    Stream.concat(
+                            Stream.of(license.getOwner()).filter(ignored -> config.isAdditionallySendToLicenseOwner()),
+                            notificationTriggerModule.getEmails().stream()
+                    ).collect(Collectors.toSet()),
                     getMailParameters(license, expirationInDays),
                     Collections.emptySet()
             );
