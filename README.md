@@ -29,3 +29,20 @@ licenseConfig:
   bodyTemplate: "The license for ${instance} is expiring in ${expiration} days \n ${license}"
   reminderInDays: [30, 10, 1]
 ```
+
+#### Timezone
+Default binding uses system timezone.
+```java
+public class SomeTimezoneProvider implements TimezoneProvider {
+    @Override
+    public ZoneId get() {
+        return ZoneId.of("Europe/Zurich");
+    }
+}
+```
+```xml
+<component>
+    <type>com.merkle.oss.magnolia.notification.configuration.TimezoneProvider</type>
+    <implementation>some.package.SomeTimezoneProvider</implementation>
+</component>
+```

@@ -4,7 +4,6 @@ import info.magnolia.cms.beans.config.ServerConfiguration;
 import info.magnolia.license.License;
 import info.magnolia.license.LicenseManager;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Map;
@@ -13,6 +12,7 @@ import java.util.stream.Stream;
 
 import com.merkle.oss.magnolia.notification.NotificationTriggerModule;
 import com.merkle.oss.magnolia.notification.Notifier;
+import com.merkle.oss.magnolia.notification.configuration.TimezoneProvider;
 import com.merkle.oss.magnolia.notification.service.EmailService;
 
 import jakarta.inject.Inject;
@@ -22,18 +22,21 @@ public class LicenseExpirationNotifier implements Notifier {
     private final LicenseManager licenseManager;
     private final NotificationTriggerModule notificationTriggerModule;
     private final ServerConfiguration serverConfiguration;
+    private final TimezoneProvider timezoneProvider;
 
     @Inject
     public LicenseExpirationNotifier(
             final EmailService emailService,
             final LicenseManager licenseManager,
             final NotificationTriggerModule notificationTriggerModule,
-            final ServerConfiguration serverConfiguration
+            final ServerConfiguration serverConfiguration,
+            final TimezoneProvider timezoneProvider
     ) {
         this.emailService = emailService;
         this.licenseManager = licenseManager;
         this.notificationTriggerModule = notificationTriggerModule;
         this.serverConfiguration = serverConfiguration;
+        this.timezoneProvider = timezoneProvider;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class LicenseExpirationNotifier implements Notifier {
     }
 
     protected boolean isExpiringIn(final License license, final int expirationInDays) {
-        final LocalDate expirationDate = LocalDate.now().plusDays(expirationInDays);
+        final LocalDate expirationDate = LocalDate.now(timezoneProvider.get()).plusDays(expirationInDays);
         if (expirationInDays == 0) {
             return license.getValidityEndDate().isBefore(expirationDate);
         }

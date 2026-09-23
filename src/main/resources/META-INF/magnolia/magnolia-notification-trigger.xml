@@ -18,6 +18,10 @@
             <implementation>com.merkle.oss.magnolia.notification.service.EmailService</implementation>
             <scope>singleton</scope>
         </component>
+        <component>
+            <type>com.merkle.oss.magnolia.notification.configuration.TimezoneProvider</type>
+            <implementation>com.merkle.oss.magnolia.notification.configuration.TimezoneProvider$Default</implementation>
+        </component>
     </components>
 
     <dependencies>
